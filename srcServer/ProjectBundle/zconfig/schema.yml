@@ -1,0 +1,33 @@
+schema:
+
+    columns:
+        projectId:
+            type:    string
+            length:  99
+            notnull: true
+
+    tables:
+
+        projects:
+            primaryKey: [ projectId ]
+            columns:
+                projectId: {}
+
+        projectDates:
+            columns:
+                projectId: {}
+                dateKey:
+                    type:    date
+                    notnull: true
+
+            primaryKey: [ projectId,dateKey ]
+
+            foreignKeys:
+                projectDates_projects_fk:
+                    foreignTable:    projects
+                    foreignColumns: [projectId]
+                    nativeColumns:  [projectId]
+                    options: { onUpdate: CASCADE, onDelete: CASCADE }
+
+            indexes:
+                projectDates_projectId_index: [projectId]

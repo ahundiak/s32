@@ -18,3 +18,5 @@
 /composer.lock
 /.idea
 /web/app.php
+/web/info.php
+/srcServer/ProjectBundle/zconfig/schema.sql
