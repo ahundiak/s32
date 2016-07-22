@@ -9,15 +9,21 @@ schema:
     tables:
 
         projects:
-            primaryKey: [ projectId ]
             columns:
                 projectId: {}
+                projectIdView: { type: string, length: 15, notnull: true}
+
+            primaryKey: [ projectId ]
 
         projectDates:
             columns:
                 projectId: {}
                 dateKey:
                     type:    date
+                    notnull: true
+                dateKeyView:
+                    type: string
+                    length:  15
                     notnull: true
 
             primaryKey: [ projectId,dateKey ]
@@ -31,3 +37,36 @@ schema:
 
             indexes:
                 projectDates_projectId_index: [projectId]
+
+        projectLevels:
+            columns:
+
+                projectId:      {}
+
+                # Required
+                levelKey:       { type: string, length: 15, notnull: true }
+                levelKeyView:   { type: string, length: 31, notnull: true }
+
+                # Required or not?
+                programKey:     { type: string, length: 15, notnull: true }
+                programKeyView: { type: string, length: 31, notnull: true }
+
+                # Always optional
+                ageKey:          { type: string, length: 15 }
+                ageKeyView:      { type: string, length: 31 }
+                genderKey:       { type: string, length: 15 }
+                genderKeyView:   { type: string, length: 31 }
+                divisionKey:     { type: string, length: 15 }
+                divisionKeyView: { type: string, length: 31 }
+
+            primaryKey: [ projectId,levelKey ]
+
+            foreignKeys:
+                projectLevels_projects_fk:
+                    foreignTable:    projects
+                    foreignColumns: [projectId]
+                    nativeColumns:  [projectId]
+                    options: { onUpdate: CASCADE, onDelete: CASCADE }
+
+            indexes:
+                projectLevels_projectId_index: [projectId]

@@ -11,7 +11,7 @@
         "psr-4": { "Tests\\": "tests/" }
     },
     "require": {
-        "php": ">=5.5.9",
+        "php": ">=7.0.0",
         "symfony/symfony": "3.2.*@dev",
         "doctrine/orm": "^2.5",
         "doctrine/doctrine-bundle": "^1.6",
@@ -26,7 +26,7 @@
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^3.0",
-        "phpunit/phpunit": "^4.8"
+        "phpunit/phpunit": "^5.4"
     },
     "scripts": {
         "post-install-cmd": [
@@ -45,11 +45,6 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ]
-    },
-    "config": {
-        "platform": {
-            "php": "5.5.9"
-        }
     },
     "extra": {
         "symfony-app-dir": "app",
