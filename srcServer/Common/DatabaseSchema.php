@@ -15,26 +15,29 @@ class DatabaseSchema
 
         $tablesData = $schemaData['schema']['tables'];
 
-        foreach($tablesData as $tableName => $tableData) {
+        foreach ($tablesData as $tableName => $tableData) {
 
             $table = $schema->createTable($tableName);
 
-            foreach($tableData['columns'] as $columnName => $columnData) {
-                $columnData = isset($columnsData[$columnName]) ? array_replace($columnsData[$columnName],$columnData) : $columnData;
+            foreach ($tableData['columns'] as $columnName => $columnData) {
+                $columnData = isset($columnsData[$columnName]) ? array_replace(
+                    $columnsData[$columnName],
+                    $columnData
+                ) : $columnData;
                 $columnType = $columnData['type'];
                 unset($columnData['type']);
-                $table->addColumn($columnName,$columnType,$columnData);
+                $table->addColumn($columnName, $columnType, $columnData);
             }
             $table->setPrimaryKey(($tableData['primaryKey']));
 
             if (isset($tableData['indexes'])) {
-                foreach($tableData['indexes'] as $indexName => $indexColumns) {
-                    $table->addIndex($indexColumns,$indexName);
+                foreach ($tableData['indexes'] as $indexName => $indexColumns) {
+                    $table->addIndex($indexColumns, $indexName);
                 }
             }
             if (isset($tableData['foreignKeys'])) {
 
-                foreach($tableData['foreignKeys'] as $foreignKeyName => $foreignKeyData) {
+                foreach ($tableData['foreignKeys'] as $foreignKeyName => $foreignKeyData) {
 
                     $foreignTable = $schema->getTable($foreignKeyData['foreignTable']);
 
@@ -43,10 +46,12 @@ class DatabaseSchema
                         $foreignKeyData['nativeColumns'],
                         $foreignKeyData['foreignColumns'],
                         $foreignKeyData['options'],
-                        $foreignKeyName);
+                        $foreignKeyName
+                    );
                 }
             }
         }
+
         return $schema;
     }
 }
